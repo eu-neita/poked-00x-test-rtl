@@ -5,7 +5,6 @@ import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 it('testa as funcionalidades do botão proximo pokemon', async () => {
-  // renderWithRouter(<App />);
   renderWithRouter(<App />);
   const encontredPokemonRole = screen.getByRole('heading', { name: 'Encountered Pokémon', level: 2 });
   expect(encontredPokemonRole).toBeInTheDocument();
