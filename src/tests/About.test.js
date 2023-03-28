@@ -25,4 +25,7 @@ it('testa se exibe informações sobre a pokedex', () => {
 
   const pPokedexTwo = screen.getByText(/One can filter Pokémon by type,/i);
   expect(pPokedexTwo).toBeInTheDocument();
+
+  const imagePokedex = screen.getByRole('img', { src: 'Pokédex' });
+  expect(imagePokedex).toBeInTheDocument();
 });
