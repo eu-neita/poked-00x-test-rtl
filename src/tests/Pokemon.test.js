@@ -4,15 +4,14 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-it('testa se exibe nenhum pokemon favoritado', async () => {
-  // renderWithRouter(<App />);
+it('testa o componente more details', async () => {
   const { history } = renderWithRouter(<App />);
   const pokemonDetails = screen.getByRole('link', { name: 'More details' });
   userEvent.click(pokemonDetails);
 
   const { pathname } = history.location;
   expect(pathname).toBe('/pokemon/25');
-  const Average = await screen.findByText('Average weight: 6.0 kg');
+  const Average = screen.getByText('Average weight: 6.0 kg');
   expect(Average).toHaveTextContent('Average weight: 6.0 kg');
 
   const type = await screen.findByText('Electric');
