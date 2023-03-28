@@ -4,7 +4,7 @@ import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 // test('', () => {});
-it('deve renderizar o os links no componente app', async () => {
+it('deve renderizar o os links no componente app', () => {
   renderWithRouter(<App />);
 
   const homeLink = screen.getByRole('link', { name: 'Home' });

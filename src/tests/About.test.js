@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-it('testa se exibe informações sobre a pokedex', () => {
+it('testa se exibe informações sobre a pokedex', async () => {
   // renderWithRouter(<App />);
   const { history } = renderWithRouter(<App />);
   const aboutLink = screen.getByRole('link', { name: 'About' });
@@ -14,18 +14,26 @@ it('testa se exibe informações sobre a pokedex', () => {
   const { pathname } = history.location;
   expect(pathname).toBe('/about');
 
-  const aboutTitle = screen.getByRole(
+  const aboutTitleOne = await screen.findByRole(
+    'heading',
+    { name: 'Pokédex', level: 1 },
+  );
+  expect(aboutTitleOne).toBeInTheDocument();
+
+  const aboutTitle = await screen.findByRole(
     'heading',
     { name: 'About Pokédex', level: 2 },
   );
   expect(aboutTitle).toBeInTheDocument();
 
-  const pPokedex = screen.getByText(/This application simulates a Pokédex/i);
+  const pPokedex = await screen.findByText(/This application simulates a Pokédex/i);
   expect(pPokedex).toBeInTheDocument();
 
-  const pPokedexTwo = screen.getByText(/One can filter Pokémon by type,/i);
+  const pPokedexTwo = await screen.findByText(/One can filter Pokémon by type,/i);
   expect(pPokedexTwo).toBeInTheDocument();
 
-  const imagePokedex = screen.getByRole('img', { src: 'Pokédex' });
+  const IMG_SRC = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+  const imagePokedex = await screen.findByRole('img', { src: IMG_SRC });
+  expect(imagePokedex).toHaveAttribute('src', IMG_SRC);
   expect(imagePokedex).toBeInTheDocument();
 });

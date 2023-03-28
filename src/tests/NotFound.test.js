@@ -15,6 +15,8 @@ it('deve renderizar o notFund', async () => {
   );
   expect(notFoundLink).toBeInTheDocument();
 
-  const imageNotfound = screen.getByRole('img', { src: 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif' });
+  const IMG_SRC = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
+  const imageNotfound = await screen.findByRole('img', { src: IMG_SRC });
+  expect(imageNotfound).toHaveAttribute('src', IMG_SRC);
   expect(imageNotfound).toBeInTheDocument();
 });
